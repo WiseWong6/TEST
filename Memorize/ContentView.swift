@@ -8,12 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
-    let animalsEmojis = ["🐶", "🐱", "🐭", "🐹", "🦊", "🐻", "🐼", "🐻‍❄️", "🐯", "🦁", "🐮", "🐷", "🐸", "🐵", "🐋", "🐧", "🐦", "🐤", "🐺", "🐡"]
     let halloweenEmojis = ["🫥", "🤠", "😈", "👿", "👹", "👺", "🤡", "👻", "💀", "☠️", "👽", "👾", "🤖", "🎃"]
     let carEmojis = ["🚗", "🚕", "🚙", "🚎", "🏎️", "🚌", "🚓", "🚑", "🚒", "🚐", "🛻", "🚚", "🚛"]
     let flyerEmojis = ["✈️", "🛫", "🛬", "🛩️", "🛰️", "🚀", "🛸", "🚁"]
     @State var emojisInit: [String] = ["🐶", "🐱", "🐭", "🐹", "🦊", "🐻", "🐼", "🐻‍❄️", "🐯", "🦁", "🐮", "🐷", "🐸", "🐵", "🐋", "🐧", "🐦", "🐤", "🐺", "🐡"]
-    @State private var cardsCount = 4
+
     var body: some View {
         VStack {
             Text("Memorize!").font(.largeTitle).bold()
@@ -21,73 +20,51 @@ struct ContentView: View {
                 cards
             }
             Spacer()
-            HStack(spacing: 20) {
-                Button(action: {
-                    emojisInit = carEmojis
-                }, label: {
-                    VStack {
-                        Image(systemName: "car.rear.fill").font(.largeTitle)
-                        Text("Vehicles")
-                    }
-
-                })
-                Button(action: {
-                    emojisInit = halloweenEmojis
-                }, label: {
-                    VStack {
-                        Image(systemName: "questionmark.circle.fill").font(.largeTitle)
-                        Text("Theme 2")
-                    }
-
-                })
-                Button(action: {
-                    emojisInit = flyerEmojis
-                }, label: {
-                    VStack {
-                        Image(systemName: "questionmark.circle.fill").font(.largeTitle)
-                        Text("Theme 3")
-                    }
-
-                })
-            }
+            buttonsView
 
         }.padding()
     }
 
     var cards: some View {
-        LazyVGrid(columns: [GridItem(.adaptive(minimum: 120.0))], content: {
-            ForEach(0 ..< cardsCount, id: \.self) { _ in
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: 90.0))], content: {
+            ForEach(0 ..< emojisInit.count, id: \.self) { _ in
                 let randomIndex = Int.random(in: 0 ..< emojisInit.count)
                 CardView(cardText: emojisInit[randomIndex]).aspectRatio(4 / 3, contentMode: .fill)
             }
         }).foregroundColor(.orange)
     }
 
-//    var buttonView: some View {
-//        HStack {
-//            cardAdder
-//            Spacer()
-//            cardRemover
-//        }
-//    }
-//
-//    var cardAdder: some View {
-//        buttonAdjust(by: 1, buttonSymbol: "rectangle.stack.badge.plus.fill", buttonName: "添加卡片")
-//    }
-//
-//    var cardRemover: some View {
-//        buttonAdjust(by: -1, buttonSymbol: "rectangle.stack.badge.minus.fill", buttonName: "删除卡片")
-//    }
-//
-//    func buttonAdjust(by offset: Int, buttonSymbol: String, buttonName: String) -> some View {
-//        Button(action: {
-//            cardsCount += offset
-//            print("\(cardsCount)")
-//        }, label: {
-//            Image(systemName: buttonSymbol)
-//            Text(buttonName).font(.title)
-//        }).buttonStyle(.bordered).disabled(cardsCount + offset < 1 || cardsCount + offset > emojis.count)
-//    }
+    var buttonsView: some View {
+        HStack(spacing: 20) {
+            button1
+            button2
+            button3
+        }
+    }
+
+    var button1: some View {
+        buttonTheme(themeArray: halloweenEmojis, symbol: "car.rear.fill", txt: "TVehicles")
+    }
+
+    var button2: some View {
+        buttonTheme(themeArray: halloweenEmojis, symbol: "questionmark.circle.fill", txt: "Theme 2")
+    }
+
+    var button3: some View {
+        buttonTheme(themeArray: flyerEmojis, symbol: "questionmark.circle.fill", txt: "Theme 3")
+    }
+
+    func buttonTheme(themeArray: [String], symbol: String, txt: String) -> some View {
+        Button(action: {
+            emojisInit = themeArray
+        }, label: {
+            VStack {
+                Image(systemName: symbol).font(.largeTitle)
+                Text(txt)
+            }
+
+        })
+    }
 }
 
 struct CardView: View {
