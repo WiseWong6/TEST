@@ -27,8 +27,8 @@ struct ContentView: View {
 
     var cards: some View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 90.0))], content: {
-            ForEach(0 ..< emojisInit.count, id: \.self) { _ in
-                let randomIndex = Int.random(in: 0 ..< emojisInit.count)
+            ForEach(emojisInit.indices, id: \.self) { _ in
+                let randomIndex = Int.random(in: emojisInit.indices)
                 CardView(cardText: emojisInit[randomIndex]).aspectRatio(4 / 3, contentMode: .fill)
             }
         }).foregroundColor(.orange)
