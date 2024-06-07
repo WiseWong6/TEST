@@ -8,11 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
-    let halloweenEmojis = ["🫥", "🤠", "😈", "👿", "👹", "👺", "🤡", "👻", "💀", "☠️", "👽", "👾", "🤖", "🎃"]
-    let carEmojis = ["🚗", "🚕", "🚙", "🚎", "🏎️", "🚌", "🚓", "🚑", "🚒", "🚐", "🛻", "🚚", "🚛"]
-    let flyerEmojis = ["✈️", "🛫", "🛬", "🛩️", "🛰️", "🚀", "🛸", "🚁"]
     @State var emojisInit: [String] = ["🐶", "🐱", "🐭", "🐹", "🦊", "🐻", "🐼", "🐻‍❄️", "🐯", "🦁", "🐮", "🐷", "🐸", "🐵", "🐋", "🐧", "🐦", "🐤", "🐺", "🐡"]
-
+    let allEmojis = [["🫥", "🤠", "😈", "👿", "👹", "👺", "🤡", "👻", "💀", "☠️", "👽", "👾", "🤖", "🎃"],["🚗", "🚕", "🚙", "🚎", "🏎️", "🚌", "🚓", "🚑", "🚒", "🚐", "🛻", "🚚", "🚛"],["✈️", "🛫", "🛬", "🛩️", "🛰️", "🚀", "🛸", "🚁"]]
+    
     var body: some View {
         VStack {
             Text("Memorize!").font(.largeTitle).bold()
@@ -43,20 +41,20 @@ struct ContentView: View {
     }
 
     var button1: some View {
-        buttonTheme(themeArray: halloweenEmojis, symbol: "car.rear.fill", txt: "TVehicles")
+        buttonTheme(themeArray: 0, symbol: "car.rear.fill", txt: "TVehicles")
     }
 
     var button2: some View {
-        buttonTheme(themeArray: halloweenEmojis, symbol: "questionmark.circle.fill", txt: "Theme 2")
+        buttonTheme(themeArray: 1, symbol: "questionmark.circle.fill", txt: "Theme 2")
     }
 
     var button3: some View {
-        buttonTheme(themeArray: flyerEmojis, symbol: "questionmark.circle.fill", txt: "Theme 3")
+        buttonTheme(themeArray: 2, symbol: "questionmark.circle.fill", txt: "Theme 3")
     }
 
-    func buttonTheme(themeArray: [String], symbol: String, txt: String) -> some View {
+    func buttonTheme(themeArray: Int, symbol: String, txt: String) -> some View {
         Button(action: {
-            emojisInit = themeArray
+            switchTheme(arrayNum:themeArray)
         }, label: {
             VStack {
                 Image(systemName: symbol).font(.largeTitle)
@@ -64,6 +62,10 @@ struct ContentView: View {
             }
 
         })
+    }
+    
+    func switchTheme(arrayNum:Int){
+        emojisInit = allEmojis[arrayNum]
     }
 }
 
