@@ -14,6 +14,7 @@
 		539FC7402C11E2F50038D16B /* MemorizeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539FC73F2C11E2F50038D16B /* MemorizeTests.swift */; };
 		539FC74A2C11E2F50038D16B /* MemorizeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539FC7492C11E2F50038D16B /* MemorizeUITests.swift */; };
 		539FC74C2C11E2F50038D16B /* MemorizeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539FC74B2C11E2F50038D16B /* MemorizeUITestsLaunchTests.swift */; };
+		53A35FAC2C1EED1000ABE25F /* MemoryGameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A35FAB2C1EED1000ABE25F /* MemoryGameModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		539FC7452C11E2F50038D16B /* MemorizeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MemorizeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		539FC7492C11E2F50038D16B /* MemorizeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorizeUITests.swift; sourceTree = "<group>"; };
 		539FC74B2C11E2F50038D16B /* MemorizeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorizeUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		53A35FAB2C1EED1000ABE25F /* MemoryGameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryGameModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 			children = (
 				539FC72E2C11E2F30038D16B /* MemorizeApp.swift */,
 				539FC7302C11E2F30038D16B /* ContentView.swift */,
+				53A35FAB2C1EED1000ABE25F /* MemoryGameModel.swift */,
 				539FC7322C11E2F50038D16B /* Assets.xcassets */,
 				539FC7342C11E2F50038D16B /* Preview Content */,
 			);
@@ -259,6 +262,7 @@
 			files = (
 				539FC7312C11E2F30038D16B /* ContentView.swift in Sources */,
 				539FC72F2C11E2F30038D16B /* MemorizeApp.swift in Sources */,
+				53A35FAC2C1EED1000ABE25F /* MemoryGameModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

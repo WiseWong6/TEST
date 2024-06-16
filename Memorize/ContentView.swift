@@ -8,12 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var emojisInit: [String] = ["🐶", "🐱", "🐭", "🐹", "🦊", "🐻", "🐼", "🐻‍❄️", "🐯", "🦁", "🐮", "🐷", "🐸", "🐵", "🐋", "🐧", "🐦", "🐤", "🐺", "🐡"]
-    let allEmojis = [
-        ["🫥", "🤠", "😈", "👿", "👹", "👺", "🤡", "👻", "💀", "☠️", "👽", "👾", "🤖", "🎃"],
-        ["🚗", "🚕", "🚙", "🚎", "🏎️", "🚌", "🚓", "🚑", "🚒", "🚐", "🛻", "🚚", "🚛"],
-        ["✈️", "🛫", "🛬", "🛩️", "🛰️", "🚀", "🛸", "🚁"]
-    ]
+    @ObservedObject var gameModel = MemoryGameModel()
 
     var body: some View {
         VStack {
@@ -29,9 +24,9 @@ struct ContentView: View {
 
     var cards: some View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 90.0))], content: {
-            ForEach(emojisInit.indices, id: \.self) { _ in
-                let randomIndex = Int.random(in: emojisInit.indices)
-                CardView(cardText: emojisInit[randomIndex]).aspectRatio(4 / 3, contentMode: .fill)
+            ForEach(gameModel.emojisInit.indices, id: \.self) { _ in
+                let randomIndex = Int.random(in: gameModel.emojisInit.indices)
+                CardView(cardText: gameModel.emojisInit[randomIndex]).aspectRatio(4 / 3, contentMode: .fill)
             }
         }).foregroundColor(.orange)
     }
@@ -58,7 +53,7 @@ struct ContentView: View {
 
     func buttonTheme(themeArray: Int, symbol: String, txt: String) -> some View {
         Button(action: {
-            switchTheme(arrayNum: themeArray)
+            gameModel.switchTheme(index:themeArray)
         }, label: {
             VStack {
                 Image(systemName: symbol).font(.largeTitle)
@@ -68,9 +63,6 @@ struct ContentView: View {
         })
     }
 
-    func switchTheme(arrayNum: Int) {
-        emojisInit = allEmojis[arrayNum]
-    }
 }
 
 struct CardView: View {
@@ -79,15 +71,6 @@ struct CardView: View {
     var body: some View {
         ZStack {
             let baseRect = RoundedRectangle(cornerRadius: 12.0)
-//            if isFaceUp {
-//                baseRect.foregroundStyle(.white)
-//                baseRect.strokeBorder(lineWidth: 2.0)
-//                Text(cardText).font(.largeTitle)
-//            } else {
-//                baseRect
-//            }
-            //将 if else 改写成Group，并通过条件值的真伪控制不透明度决定是否隐藏
-            //
             Group{
                 baseRect.foregroundStyle(.white)
                 baseRect.strokeBorder(lineWidth: 2.0)
