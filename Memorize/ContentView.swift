@@ -9,8 +9,12 @@ import SwiftUI
 
 struct ContentView: View {
     @State var emojisInit: [String] = ["🐶", "🐱", "🐭", "🐹", "🦊", "🐻", "🐼", "🐻‍❄️", "🐯", "🦁", "🐮", "🐷", "🐸", "🐵", "🐋", "🐧", "🐦", "🐤", "🐺", "🐡"]
-    let allEmojis = [["🫥", "🤠", "😈", "👿", "👹", "👺", "🤡", "👻", "💀", "☠️", "👽", "👾", "🤖", "🎃"],["🚗", "🚕", "🚙", "🚎", "🏎️", "🚌", "🚓", "🚑", "🚒", "🚐", "🛻", "🚚", "🚛"],["✈️", "🛫", "🛬", "🛩️", "🛰️", "🚀", "🛸", "🚁"]]
-    
+    let allEmojis = [
+        ["🫥", "🤠", "😈", "👿", "👹", "👺", "🤡", "👻", "💀", "☠️", "👽", "👾", "🤖", "🎃"],
+        ["🚗", "🚕", "🚙", "🚎", "🏎️", "🚌", "🚓", "🚑", "🚒", "🚐", "🛻", "🚚", "🚛"],
+        ["✈️", "🛫", "🛬", "🛩️", "🛰️", "🚀", "🛸", "🚁"]
+    ]
+
     var body: some View {
         VStack {
             Text("Memorize!").font(.largeTitle).bold()
@@ -54,7 +58,7 @@ struct ContentView: View {
 
     func buttonTheme(themeArray: Int, symbol: String, txt: String) -> some View {
         Button(action: {
-            switchTheme(arrayNum:themeArray)
+            switchTheme(arrayNum: themeArray)
         }, label: {
             VStack {
                 Image(systemName: symbol).font(.largeTitle)
@@ -63,8 +67,8 @@ struct ContentView: View {
 
         })
     }
-    
-    func switchTheme(arrayNum:Int){
+
+    func switchTheme(arrayNum: Int) {
         emojisInit = allEmojis[arrayNum]
     }
 }
@@ -75,13 +79,21 @@ struct CardView: View {
     var body: some View {
         ZStack {
             let baseRect = RoundedRectangle(cornerRadius: 12.0)
-            if isFaceUp {
+//            if isFaceUp {
+//                baseRect.foregroundStyle(.white)
+//                baseRect.strokeBorder(lineWidth: 2.0)
+//                Text(cardText).font(.largeTitle)
+//            } else {
+//                baseRect
+//            }
+            //将 if else 改写成Group，并通过条件值的真伪控制不透明度决定是否隐藏
+            //
+            Group{
                 baseRect.foregroundStyle(.white)
                 baseRect.strokeBorder(lineWidth: 2.0)
                 Text(cardText).font(.largeTitle)
-            } else {
-                baseRect
-            }
+            }.opacity(isFaceUp ? 0:1)
+            baseRect.opacity(isFaceUp ? 1:0)
         }
         .onTapGesture {
             isFaceUp.toggle()
